@@ -2,11 +2,10 @@ package com.example.student_service.constants;
 
 /**
  * <p>
- * Provides the fields for student related messages
+ * Contains constant values related to student operations
  * </p>
  *
  * @author Kavinila E
- *
  */
 public class StudentConstants {
 

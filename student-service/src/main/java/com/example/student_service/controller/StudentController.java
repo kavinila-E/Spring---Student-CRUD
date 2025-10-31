@@ -61,7 +61,6 @@ public class StudentController {
         return studentService.getAllStudents();
     }
 
-
     /**
      * <p>
      * Updates an existing student record based on the provided student ID.
@@ -81,7 +80,6 @@ public class StudentController {
     public Student updateStudent(final @PathVariable Integer id, final @RequestBody StudentRequestDto studentRequestDto) {
         return studentService.updateStudent(id, studentRequestDto);
     }
-
 
     /**
      * <p>

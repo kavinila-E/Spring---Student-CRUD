@@ -1,6 +1,8 @@
 package com.example.student_service.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -10,6 +12,8 @@ import lombok.Data;
  * @author Kavinila E
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class StudentRequestDto {
     private String studentName;
     private String address;

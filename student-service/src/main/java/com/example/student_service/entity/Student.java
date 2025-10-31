@@ -6,7 +6,9 @@ import jakarta.persistence.Table;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * <p>
@@ -17,6 +19,8 @@ import lombok.Data;
  */
 @Data
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "studentTable")
 public class Student {
 
@@ -26,5 +30,4 @@ public class Student {
     private String studentName;
     private String address;
     private int mark;
-
 }

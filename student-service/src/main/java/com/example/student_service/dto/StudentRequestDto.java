@@ -16,6 +16,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentRequestDto {
     private String studentName;
-    private String address;
     private int marks;
+    private String city;
+    private String pincode;
+    private String state;
 }

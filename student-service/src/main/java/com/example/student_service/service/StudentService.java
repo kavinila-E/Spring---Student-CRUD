@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -38,7 +39,6 @@ public class StudentService {
 
         student.setStudentName(studentRequestDto.getStudentName());
         student.setMark(studentRequestDto.getMarks());
-        student.setAddress(studentRequestDto.getAddress());
 
         logger.info(StudentConstants.STUDENT_CREATED);
 
@@ -75,7 +75,6 @@ public class StudentService {
 
             student.setStudentName(studentRequestDto.getStudentName());
             student.setMark(studentRequestDto.getMarks());
-            student.setAddress(studentRequestDto.getAddress());
 
             logger.info(StudentConstants.STUDENT_UPDATED);
 
@@ -83,6 +82,19 @@ public class StudentService {
         } else {
             throw new RuntimeException(StudentConstants.STUDENT_NOT_FOUND + id);
         }
+    }
+
+    /**
+     * <p>
+     * Get the {@link Student} by the given id
+     * </p>
+     *
+     * @param id Represents the id of the student
+     * @return {@link Student}
+     */
+    public Student getStudent(final Integer id) {
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException(StudentConstants.STUDENT_NOT_FOUND + id));
     }
 
     /**
@@ -94,5 +106,41 @@ public class StudentService {
         studentRepository.delete(studentRepository.findById(id).orElseThrow(() -> new RuntimeException(StudentConstants.STUDENT_NOT_FOUND + id)));
 
         return StudentConstants.STUDENT_DELETED;
+    }
+
+    /**
+     * <p>
+     * Get the student by using stored procedure
+     * </p>
+     *
+     * @param id Represents the student id
+     * @return {@link StudentRequestDto}
+     */
+    public StudentRequestDto getStudentByStoredProcedure(final Integer id) {
+        final List<Object[]> students = studentRepository.getStudentDetailsById(id);
+
+        if (students.isEmpty()) {
+            throw new RuntimeException(StudentConstants.STUDENT_NOT_FOUND + id);
+        }
+
+        final Object[] row = students.get(0);
+
+        return new StudentRequestDto(
+                (String) row[0],
+                (Integer) row[1],
+                (String) row[2],
+                (String) row[3],
+                (String) row[4]
+        );
+    }
+
+    public String getPincode(final Integer id) {
+        final String pincode = studentRepository.getPincodeByStudentId(id);
+
+        if (Objects.nonNull(pincode)) {
+            return pincode;
+        } else {
+            throw new RuntimeException(StudentConstants.STUDENT_NOT_FOUND + id);
+        }
     }
 }

@@ -28,6 +28,5 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int studentId;
     private String studentName;
-    private String address;
     private int mark;
 }

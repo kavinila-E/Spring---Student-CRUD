@@ -83,6 +83,32 @@ public class StudentController {
 
     /**
      * <p>
+     * Gets the {@link Student} matches for the given id
+     * </p>
+     *
+     * @param id Represents the id of the student
+     * @return the {@link Student}
+     */
+    @GetMapping("/{id}")
+    public Student getStudentById(final Integer id) {
+        return studentService.getStudent(id);
+    }
+
+    /**
+     * <p>
+     * Gets the {@link StudentRequestDto} matches for the given id
+     * </p>
+     *
+     * @param id Represents the student id
+     * @return {@link StudentRequestDto}
+     */
+    @GetMapping("/procedure/{id}")
+    public StudentRequestDto getStudentByStoredProcedure(@PathVariable Integer id) {
+        return studentService.getStudentByStoredProcedure(id);
+    }
+
+    /**
+     * <p>
      * Deletes a student record by its unique ID.
      * </p>
      *
@@ -98,5 +124,10 @@ public class StudentController {
     @DeleteMapping("/{id}")
     public String deleteStudent(final @PathVariable Integer id) {
         return studentService.deleteStudent(id);
+    }
+
+    @GetMapping("function/{id}")
+    public String getPincode(final @PathVariable Integer id) {
+        return studentService.getPincode(id);
     }
 }
